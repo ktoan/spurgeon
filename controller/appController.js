@@ -83,7 +83,7 @@ router.get("/getBlogs", async (req, res) => {
   try {
     const keyword = req.query.keyword || "";
     const searchQuery =
-      "select b.*, u.name as author_name from blogs b join user u on b.author_id = u.id where title like '%$keyword%' and isApproved = TRUE";
+      "select b.*, u.name as author_name from blogs b join users u on b.author_id = u.id where title like '%$keyword%' and isApproved = TRUE";
     const replaceSearchQuery = searchQuery.replace(/\$keyword/g, keyword);
     const [rows] = await pool.query(replaceSearchQuery);
 
