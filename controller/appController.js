@@ -101,7 +101,7 @@ router.post("/login", async (req, res) => {
   const { username, password } = req.body;
   try {
     const query =
-      "select * from userss where username = '$username' and password = '$password'";
+      "select * from users where username = '$username' and password = '$password'";
     const replaceQuery = query.replace(/\$username/g, username);
     const replaceQuery2 = replaceQuery.replace(/\$password/g, password);
     const [rows] = await pool.query(replaceQuery2);
