@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <!--- basic page needs -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spurgeon - Login</title>
+
+    <script>
+      document.documentElement.classList.remove("no-js");
+      document.documentElement.classList.add("js");
+    </script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/vendor.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- favicons -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="manifest" href="site.webmanifest" />
+  </head>
+  <body id="top">
+    <!-- preloader -->
+    <div id="preloader">
+      <div id="loader" class="dots-fade">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+
+    <!-- page wrap -->
+    <div
+      style="
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      "
+    >
+      <div style="width: 400px">
+        <form
+          style="width: 100%"
+          class="entry__form"
+          action="/login"
+          method="post"
+          autocomplete="off"
+        >
+          <h1 style="text-align: center">Login</h1>
+          <div class="column lg-12 form-field">
+            <input
+              name="username"
+              id="cUsername"
+              class="u-fullwidth"
+              placeholder="Username"
+              value="<%= username %>"
+              type="text"
+            />
+          </div>
+          <div class="column lg-12 form-field">
+            <input
+              name="password"
+              id="cPassword"
+              class="u-fullwidth"
+              placeholder="Password"
+              value="<%= password %>"
+              type="password"
+            />
+          </div>
+          <% if (error) { %>
+          <p style="text-align: center; color: red"><%= error %></p>
+          <% }%>
+          <div class="column lg-12">
+            <input
+              name="submit"
+              class="btn btn--primary btn-wide btn--large u-fullwidth"
+              value="Login"
+              type="submit"
+            />
+          </div>
+          <div class="column lg-12">
+            <a href="/">
+              <p
+                id="backLink"
+                style="
+                  text-align: center;
+                  color: #6495ed;
+                  text-decoration: underline;
+                  cursor: pointer;
+                "
+              >
+                Back to Spurgeon
+              </p>
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Java Script -->
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
