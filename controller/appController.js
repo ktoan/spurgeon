@@ -6,7 +6,7 @@ const pool = require("../database");
 router.get("", async (req, res) => {
   try {
     const [rows] = await pool.query(
-      "select * from blog order by id desc limit 3"
+      "select * from blogs order by id desc limit 3"
     );
     res.render("index", { categories: await getCategories(), topBlogs: rows });
   } catch (error) {
@@ -40,7 +40,7 @@ router.get("/blog", async (req, res) => {
     const offset = (page - 1) * limit;
 
     const searchQuery =
-      "select b.*, u.name as author_name from blog b join user u on b.author_id = u.id where title like '%$keyword%' and category like '$category' and isApproved = TRUE LIMIT $limit OFFSET $offset";
+      "select b.*, u.name as author_name from blogs b join user u on b.author_id = u.id where title like '%$keyword%' and category like '$category' and isApproved = TRUE LIMIT $limit OFFSET $offset";
     const replaceSearchQuery = searchQuery.replace(/\$keyword/g, keyword);
     const replaceSearchQuery2 = replaceSearchQuery.replace(
       /\$category/g,
@@ -55,7 +55,7 @@ router.get("/blog", async (req, res) => {
     const [rows] = await pool.query(replaceSearchQuery4, [limit, offset]);
 
     const countQuery =
-      "select COUNT(*) as total from blog b join user u on b.author_id = u.id where title like '%$keyword%' and category like '$category' and isApproved = TRUE";
+      "select COUNT(*) as total from blogs b join user u on b.author_id = u.id where title like '%$keyword%' and category like '$category' and isApproved = TRUE";
     const replaceCountQuery = countQuery.replace(/\$keyword/g, keyword);
     const replaceCountQuery2 = replaceCountQuery.replace(
       /\$category/g,
@@ -83,7 +83,7 @@ router.get("/getBlogs", async (req, res) => {
   try {
     const keyword = req.query.keyword || "";
     const searchQuery =
-      "select b.*, u.name as author_name from blog b join user u on b.author_id = u.id where title like '%$keyword%' and isApproved = TRUE";
+      "select b.*, u.name as author_name from blogs b join user u on b.author_id = u.id where title like '%$keyword%' and isApproved = TRUE";
     const replaceSearchQuery = searchQuery.replace(/\$keyword/g, keyword);
     const [rows] = await pool.query(replaceSearchQuery);
 
@@ -101,7 +101,7 @@ router.post("/login", async (req, res) => {
   const { username, password } = req.body;
   try {
     const query =
-      "select * from user where username = '$username' and password = '$password'";
+      "select * from userss where username = '$username' and password = '$password'";
     const replaceQuery = query.replace(/\$username/g, username);
     const replaceQuery2 = replaceQuery.replace(/\$password/g, password);
     const [rows] = await pool.query(replaceQuery2);
@@ -138,7 +138,8 @@ router.get("/logout", (req, res) => {
 module.exports = router;
 
 const getCategories = async () => {
-  const query = "SELECT DISTINCT category FROM Blog WHERE category IS NOT NULL";
+  const query =
+    "SELECT DISTINCT category from blogs WHERE category IS NOT NULL";
   const [rows] = await pool.query(query);
   return [{ category: "All" }, ...rows];
 };
